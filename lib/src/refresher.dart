@@ -71,6 +71,9 @@ class EasyRefresh extends StatefulWidget {
   /// 列表方向
   final Axis scrollDirection;
 
+  /// 速度倍数
+  final double velocityTimes;
+
   /// 反向
   final bool reverse;
   final ScrollController scrollController;
@@ -118,6 +121,7 @@ class EasyRefresh extends StatefulWidget {
     this.firstRefreshWidget,
     this.headerIndex,
     this.emptyWidget,
+    this.velocityTimes,
     this.topBouncing = true,
     this.bottomBouncing = true,
     @required this.child,
@@ -158,6 +162,7 @@ class EasyRefresh extends StatefulWidget {
     this.dragStartBehavior = DragStartBehavior.start,
     this.firstRefresh,
     this.firstRefreshWidget,
+    this.velocityTimes,
     this.emptyWidget,
     this.topBouncing = true,
     this.bottomBouncing = true,
@@ -178,6 +183,7 @@ class EasyRefresh extends StatefulWidget {
     this.scrollController,
     this.header,
     this.footer,
+    this.velocityTimes,
     this.firstRefresh,
     this.topBouncing = true,
     this.bottomBouncing = true,
@@ -279,6 +285,7 @@ class _EasyRefreshState extends State<EasyRefresh> {
     _physics = EasyRefreshPhysics(
       topBouncing: widget.onRefresh == null ? widget.topBouncing : true,
       bottomBouncing: widget.onLoad == null ? widget.bottomBouncing : true,
+      velocityTimes: widget.velocityTimes,
     );
   }
 
@@ -336,6 +343,7 @@ class _EasyRefreshState extends State<EasyRefresh> {
       _physics = EasyRefreshPhysics(
         topBouncing: topBouncing,
         bottomBouncing: bottomBouncing,
+        velocityTimes:widget.velocityTimes,
       );
     }
     // 构建Header和Footer

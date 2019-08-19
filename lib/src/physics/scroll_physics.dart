@@ -23,11 +23,15 @@ class EasyRefreshPhysics extends ScrollPhysics {
   /// 底部回弹
   final bool bottomBouncing;
 
+  /// 速度倍数
+  final double velocityTimes;
+
   /// Creates scroll physics that bounce back from the edge.
   const EasyRefreshPhysics({
     ScrollPhysics parent,
     this.topBouncing = true,
     this.bottomBouncing = true,
+    @required this.velocityTimes,
   }) : super(parent: parent);
 
   @override
@@ -36,6 +40,7 @@ class EasyRefreshPhysics extends ScrollPhysics {
       parent: buildParent(ancestor),
       topBouncing: topBouncing,
       bottomBouncing: bottomBouncing,
+      velocityTimes: velocityTimes,
     );
   }
 
@@ -52,7 +57,6 @@ class EasyRefreshPhysics extends ScrollPhysics {
 
   @override
   bool shouldAcceptUserOffset(ScrollMetrics position) {
-    // TODO: implement shouldAcceptUserOffset
     return true;
   }
 
@@ -124,8 +128,7 @@ class EasyRefreshPhysics extends ScrollPhysics {
       return BouncingScrollSimulation(
         spring: spring,
         position: position.pixels,
-        velocity: velocity *
-            0.91, // TODO(abarth): We should move this constant closer to the drag end.
+        velocity: velocity * (velocityTimes ?? 0.91), // We should move this constant closer to the drag end.
         leadingExtent: position.minScrollExtent,
         trailingExtent: position.maxScrollExtent,
         tolerance: tolerance,
