@@ -309,7 +309,7 @@ class _EasyRefreshState extends State<EasyRefresh> {
         .whenComplete(() {
       _scrollerController.animateTo(
           -(_header.triggerDistance + EasyRefresh.callOverExtent),
-          duration: Duration(milliseconds: 200),
+          duration: Duration(milliseconds: 100),
           curve: Curves.linear);
     });
   }
@@ -328,7 +328,7 @@ class _EasyRefreshState extends State<EasyRefresh> {
           _scrollerController.position.maxScrollExtent +
               _footer.triggerDistance +
               EasyRefresh.callOverExtent,
-          duration: Duration(milliseconds: 200),
+          duration: Duration(milliseconds: 100),
           curve: Curves.linear);
     });
   }
